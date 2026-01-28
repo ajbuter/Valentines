@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For You ❤️</title>
+
+  <!-- Google Font for a soft romantic feel -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      user-select: none;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(#ffe6ef, #fff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      font-family: 'Pacifico', cursive;
+    }
+
+    .scene {
+      text-align: center;
+      position: relative;
+    }
+
+    .message {
+      font-size: 2.6rem;
+      color: #c2185b;
+      opacity: 0;
+      transition: opacity 1.8s ease;
+    }
+
+    .flower {
+      font-size: 6rem;
+      animation: bloom 2.5s ease forwards;
+      margin-bottom: 20px;
+    }
+
+    @keyframes bloom {
+      0% { transform: scale(0); }
+      100% { transform: scale(1); }
+    }
+
+    .petal {
+      position: absolute;
+      font-size: 1.5rem;
+      pointer-events: none;
+      animation: fall linear forwards;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(700px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .buttons {
+      margin-top: 30px;
+      display: none;
+    }
+
+    button {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.4rem;
+      padding: 12px 24px;
+      margin: 0 10px;
+      border: none;
+      border-radius: 30px;
+      background: #f06292;
+      color: white;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    button:active {
+      transform: scale(0.95);
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 2rem;
+      animation: floatUp 3s ease forwards;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-400px); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="scene">
+  <div class="flower" id="flower">🌸</div>
+  <div class="message" id="message">Hi Love</div>
+
+  <div class="buttons" id="buttons">
+    <button onclick="yesClicked()">Yes 💖</button>
+    <button onclick="yesClicked()">Of course 💕</button>
+  </div>
+</div>
+
+<script>
+  const message = document.getElementById('message');
+  const flower = document.getElementById('flower');
+  const buttons = document.getElementById('buttons');
+
+  // Fade in first message
+  setTimeout(() => {
+    message.style.opacity = 1;
+  }, 600);
+
+  // Transition sequence
+  setTimeout(() => {
+    message.style.opacity = 0;
+    dropPetals();
+
+    setTimeout(() => {
+      flower.innerText = '💐';
+      message.innerText = 'Will you be my Valentine?';
+      message.style.opacity = 1;
+      buttons.style.display = 'block';
+    }, 2500);
+  }, 3500);
+
+  function dropPetals() {
+    for (let i = 0; i < 18; i++) {
+      const petal = document.createElement('div');
+      petal.className = 'petal';
+      petal.innerText = '🌸';
+      petal.style.left = Math.random() * window.innerWidth + 'px';
+      petal.style.top = '-50px';
+      petal.style.animationDuration = 2 + Math.random() * 2 + 's';
+      document.body.appendChild(petal);
+
+      setTimeout(() => petal.remove(), 4000);
+    }
+  }
+
+  function yesClicked() {
+    buttons.style.display = 'none';
+    message.innerText = 'You just made me the happiest 💘';
+
+    for (let i = 0; i < 25; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.innerText = '❤️';
+      heart.style.left = Math.random() * window.innerWidth + 'px';
+      heart.style.bottom = '0px';
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 3000);
+    }
+  }
+</script>
+
+</body>
+</html>
