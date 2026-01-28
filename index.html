@@ -104,11 +104,11 @@
 
 <div class="scene">
   <div class="flower" id="flower">🌸</div>
-  <div class="message" id="message">Hi Love</div>
+  <div class="message" id="message">Hi My Love!</div>
 
   <div class="buttons" id="buttons">
     <button onclick="yesClicked()">Yes 💖</button>
-    <button onclick="yesClicked()">Of course 💕</button>
+    <button onclick="noClicked()">Nope 💕</button>
   </div>
 </div>
 
@@ -128,7 +128,7 @@
     dropPetals();
 
     setTimeout(() => {
-      flower.innerText = '💐';
+      flower.innerText = '🌸';
       message.innerText = 'Will you be my Valentine?';
       message.style.opacity = 1;
       buttons.style.display = 'block';
@@ -151,7 +151,23 @@
 
   function yesClicked() {
     buttons.style.display = 'none';
-    message.innerText = 'You just made me the happiest 💘';
+    message.innerText = '';
+
+    for (let i = 0; i < 25; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.innerText = '❤️';
+      heart.style.left = Math.random() * window.innerWidth + 'px';
+      heart.style.bottom = '0px';
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 3000);
+    }
+  }
+
+  function noClicked() {
+    buttons.style.display = 'none';
+    message.innerText = 'Try again';
 
     for (let i = 0; i < 25; i++) {
       const heart = document.createElement('div');
