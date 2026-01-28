@@ -106,6 +106,9 @@
       position: absolute;
       transition: transform 0.25s ease;
     }
+    #yesBtn{
+      position: absolute;
+    }
   </style>
 </head>
 <body>
@@ -115,7 +118,7 @@
   <div class="message" id="message">Hi!</div>
 
   <div class="buttons" id="buttons">
-    <button onclick="yesClicked()">Yes! 💖</button>
+    <button id="yesBtn">Yes! 💖</button>
     <button id="noBtn">No 💕</button>
   </div>
 </div>
@@ -161,7 +164,9 @@
     }
   }
 
-  function yesClicked() {
+  const yesBtn = document.getElementById('yesBtn');
+  yesBtn.addEventListener('click', yes() )
+  function yes() {
     buttons.style.display = 'none';
     message.innerText = '';
     for(let i = 0; i < 10; i++) {
@@ -181,7 +186,7 @@
   }
 
   const noBtn = document.getElementById('noBtn');
-  noBtn.addEventListener('click', moveButton);
+  noBtn.addEventListener('click', moveButton() );
 
   function moveButton() {
     const padding = 20;
