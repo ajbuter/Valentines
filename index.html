@@ -107,7 +107,7 @@
   <div class="message" id="message">Hi My Love!</div>
 
   <div class="buttons" id="buttons">
-    <button onclick="yesClicked()">Yes 💖</button>
+    <button onclick="yesClicked()">Yes! 💖</button>
     <button onclick="noClicked()">Nope 💕</button>
   </div>
 </div>
@@ -162,6 +162,8 @@
       document.body.appendChild(heart);
 
       setTimeout(() => heart.remove(), 3000);
+      setTimeout(5000);
+      history.back()
     }
   }
 
@@ -172,7 +174,7 @@
     for (let i = 0; i < 25; i++) {
       const heart = document.createElement('div');
       heart.className = 'heart';
-      heart.innerText = '❤️';
+      heart.innerText = '💔';
       heart.style.left = Math.random() * window.innerWidth + 'px';
       heart.style.bottom = '0px';
       document.body.appendChild(heart);
