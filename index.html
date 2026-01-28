@@ -67,8 +67,11 @@
     }
 
     .buttons {
-      margin-top: 30px;
-      display: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 260px; 
+      margin: 30px auto 0;
       position: relative;
     }
 
@@ -161,7 +164,7 @@
   function yesClicked() {
     buttons.style.display = 'none';
     message.innerText = '';
-    for(let i = 0; i < 15; i++) {
+    for(let i = 0; i < 10; i++) {
       setTimeout(() => {
       for (let i = 0; i < 25; i++) {
         const heart = document.createElement('div');
@@ -171,7 +174,7 @@
         heart.style.bottom = '0px';
         document.body.appendChild(heart);
 
-        setTimeout(() => heart.remove(), 3000);
+        setTimeout(() => heart.remove(), 6000);
         }
       }, 1500 + (i*200));
     }
