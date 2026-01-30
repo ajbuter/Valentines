@@ -166,7 +166,7 @@
 
   const yesBtn = document.getElementById('yesBtn');
   yesBtn.addEventListener('click', yes)
-  
+
   function yes() {
     buttons.style.display = 'none';
     message.innerText = '';
@@ -196,7 +196,7 @@
     const randomX = Math.random() * maxX;
     const randomY = Math.random() * maxY;
 
-    noBtn.style.transform = 'translate(${x}px, ${y}px)';
+    noBtn.style.transform = 'translate(${randomX}px, ${randomY}px)';
   }
 </script>
 
