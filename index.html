@@ -165,7 +165,8 @@
   }
 
   const yesBtn = document.getElementById('yesBtn');
-  yesBtn.addEventListener('click', yes() )
+  yesBtn.addEventListener('click', yes)
+  
   function yes() {
     buttons.style.display = 'none';
     message.innerText = '';
@@ -186,7 +187,7 @@
   }
 
   const noBtn = document.getElementById('noBtn');
-  noBtn.addEventListener('click', moveButton() );
+  noBtn.addEventListener('click', moveButton);
 
   function moveButton() {
     const padding = 20;
