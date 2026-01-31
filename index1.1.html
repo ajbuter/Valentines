@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Character encoding -->
+  <meta charset="UTF-8" />
+
+  <!-- Responsive scaling for mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Page title shown in browser tab -->
+  <title>For You ❤️</title>
+
+  <!-- Google Font for a soft romantic handwritten look -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+  <style>
+    /* Apply to all elements */
+    * {
+      box-sizing: border-box; /* Prevent padding from affecting size */
+      user-select: none;      /* Disable text selection (feels more like an animation) */
+    }
+
+    /* Full-page layout */
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(#ffe6ef, #fff); /* Pink to white gradient */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden; /* Prevent scrollbars from falling elements */
+      font-family: 'Pacifico', cursive;
+    }
+
+    /* Main container holding everything */
+    .scene {
+      text-align: center;
+      position: relative;
+    }
+
+    /* Message text (fades in/out) */
+    .message {
+      font-size: 2.6rem;
+      color: #c2185b;
+      opacity: 0; /* Start hidden */
+      transition: opacity 1s ease; /* Smooth fade */
+    }
+
+    /* Flower emoji at the top */
+    .flower {
+      font-size: 6rem;
+      animation: bloom 1.5s ease forwards;
+      margin-bottom: 20px;
+    }
+
+    /* Flower "bloom" animation */
+    @keyframes bloom {
+      0% { transform: scale(0); }
+      100% { transform: scale(1); }
+    }
+
+    /* Falling flower petals */
+    .petal {
+      position: absolute;
+      font-size: 1.5rem;
+      pointer-events: none; /* Don't interfere with clicks */
+      animation: fall linear forwards;
+    }
+
+    /* Petal falling animation */
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(700px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Container for Yes / No buttons */
+    .buttons {
+      display: none; /* Hidden until question appears */
+      justify-content: space-between;
+      align-items: center;
+      width: 400px;
+      margin: 150px auto 0;
+      position: relative;
+    }
+
+    /* Button styling */
+    button {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.4rem;
+      padding: 12px 24px;
+      margin: 0 10px;
+      border: none;
+      border-radius: 30px;
+      background: #f06292;
+      color: white;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    /* Button press effect */
+    button:active {
+      transform: scale(0.95);
+    }
+
+    /* Floating hearts animation */
+    .heart {
+      position: absolute;
+      font-size: 2rem;
+      animation: floatUp 3s ease forwards;
+      pointer-events: none;
+    }
+
+    /* Hearts floating upward */
+    @keyframes floatUp {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-400px); opacity: 0; }
+    }
+
+    /* "No" button movement animation */
+    #noBtn {
+      transition: transform 0.25s ease;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- Main visual container -->
+<div class="scene">
+  <!-- Flower emoji -->
+  <div class="flower" id="flower">🌸</div>
+
+  <!-- Message text -->
+  <div class="message" id="message">Hi!</div>
+
+  <!-- Yes / No buttons -->
+  <div class="buttons" id="buttons">
+    <button id="yesBtn">Yes! 💖</button>
+    <button id="noBtn">No 💕</button>
+  </div>
+</div>
+
+<script>
+  /* Grab important elements */
+  const message = document.getElementById('message');
+  const flower = document.getElementById('flower');
+  const buttons = document.getElementById('buttons');
+
+  /* Fade in the first message after a delay */
+  setTimeout(() => {
+    message.style.opacity = 1;
+  }, 600);
+
+  /* Transition to Valentine question */
+  setTimeout(() => {
+    message.style.opacity = 0; /* Fade out first message */
+    dropPetals();              /* Start falling petals */
+
+    setTimeout(() => {
+      flower.innerText = '🌸';
+      message.innerText = 'Will you be my Valentine?';
+      message.style.opacity = 1;
+      buttons.style.display = 'block';
+    }, 2500);
+  }, 600); /* had been 3500 */
+
+  /* Create falling flower petals */
+  function dropPetals() {
+    for (let i = 0; i < 15; i++) {
+      setTimeout(() => {
+        for (let i = 0; i < 18; i++) {
+          const petal = document.createElement('div');
+          petal.className = 'petal';
+          petal.innerText = '🌸';
+
+          /* Random horizontal position */
+          petal.style.left = Math.random() * window.innerWidth + 'px';
+          petal.style.top = '-50px';
+
+          /* Random fall speed */
+          petal.style.animationDuration = 2 + Math.random() * 2 + 's';
+
+          document.body.appendChild(petal);
+
+          /* Remove petal after animation */
+          setTimeout(() => petal.remove(), 4000);
+        }
+      }, i * 200);
+    }
+  }
+
+  /* Yes button logic */
+  const yesBtn = document.getElementById('yesBtn');
+  yesBtn.addEventListener('click', yes);
+
+  function yes() {
+    buttons.style.display = 'none';
+    message.innerText = '';
+
+    /* Create waves of floating hearts */
+    for (let i = 0; i < 10; i++) {
+      setTimeout(() => {
+        for (let i = 0; i < 25; i++) {
+          const heart = document.createElement('div');
+          heart.className = 'heart';
+          heart.innerText = '❤️';
+
+          heart.style.left = Math.random() * window.innerWidth + 'px';
+          heart.style.bottom = '0px';
+
+          document.body.appendChild(heart);
+
+          setTimeout(() => heart.remove(), 6000);
+        }
+      }, 1500 + (i * 200));
+    }
+  }
+
+  /* No button runs away */
+  const noBtn = document.getElementById('noBtn');
+  noBtn.addEventListener('click', moveButton);
+
+  function moveButton() {
+    const padding = 20;
+
+    const maxX = window.innerWidth - noBtn.offsetWidth - padding;
+    const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+
+    const randomX = Math.random() * maxX;
+    const randomY = Math.random() * maxY;
+
+    /* Move button to random spot */
+    noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+  }
+</script>
+
+</body>
+</html>
